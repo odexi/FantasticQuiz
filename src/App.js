@@ -13,10 +13,11 @@ import axios from 'axios';
 import './App.css';
 import { template } from '@babel/core';
 import QuizSetup from './components/QuizSetup';
+import Quiz from './components/Quiz';
 
 class App extends Component {
   state = {
-    todos: []
+    questions: []
   }
 
   componentDidMount() {
@@ -35,38 +36,38 @@ class App extends Component {
   }
 
   // Toggle Complete
-  markComplete = (id) => {
-    console.log(id)
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-        }
-        return todo;
-      })
-    })
-  }
+  // markComplete = (id) => {
+  //   console.log(id)
+  //   this.setState({
+  //     todos: this.state.todos.map(todo => {
+  //       if (todo.id === id) {
+  //         todo.completed = !todo.completed
+  //       }
+  //       return todo;
+  //     })
+  //   })
+  // }
 
-  // Delete Todo
-  delTodo = (id) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(res => this.setState({
-        todos: [...this.state.todos
-          .filter(todo => todo.id !== id)]
-      }));
-  }
+  // // Delete Todo
+  // delTodo = (id) => {
+  //   axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  //     .then(res => this.setState({
+  //       todos: [...this.state.todos
+  //         .filter(todo => todo.id !== id)]
+  //     }));
+  // }
 
-  // Add Todo
-  addTodo = (title) => {
-    axios.post('https://jsonplaceholder.typicode.com/todos', {
-      title,
-      completed: false
-    })
-      .then(res => this.setState({
-        todos:
-          [...this.state.todos, res.data]
-      }));
-  }
+  // // Add Todo
+  // addTodo = (title) => {
+  //   axios.post('https://jsonplaceholder.typicode.com/todos', {
+  //     title,
+  //     completed: false
+  //   })
+  //     .then(res => this.setState({
+  //       todos:
+  //         [...this.state.todos, res.data]
+  //     }));
+  // }
 
   getQuestions = (nickname, numberOfQuestions, categoryId, difficulty) => {
     console.log(nickname, numberOfQuestions, categoryId, difficulty)
@@ -84,12 +85,33 @@ class App extends Component {
     
     axios.get(url)
       .then(res => {
-        console.log(res)
+        if (res.status === 200) {          
+          this.setState({questions: this.decodeQuestionsHtmlEntity(res.data.results)})
+        } 
+        else {
+          console.log("Api call was unsuccessfull!")
+        }
+        
       })
   }
 
+  decodeHtml = (html) => {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
+  decodeQuestionsHtmlEntity = (results) => {
+    results = results.map(result => {
+      result.question = this.decodeHtml(result.question);
+      result.correct_answer = this.decodeHtml(result.correct_answer);
+      result.incorrect_answers.map(res => this.decodeHtml(res));
+      return result
+    })
+    return results    
+  }
+
   render() {
-    console.log(this.state.todos)
     return (
       <Router>
 
@@ -104,9 +126,8 @@ class App extends Component {
             <Header />
             <Route exact path="/" render={props => (
               <React.Fragment>
-                <QuizSetup getQuestions={this.getQuestions}/> 
-                <Todos todos={this.state.todos} markComplete={this.markComplete}
-                  delTodo={this.delTodo} />
+                { this.state.questions.length > 0 ? <Quiz questions={this.state.questions} /> : <QuizSetup getQuestions={this.getQuestions}/> }
+                
               </React.Fragment>
             )} />
             <Route path="/about" component={About} />
