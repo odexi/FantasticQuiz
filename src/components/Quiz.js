@@ -10,8 +10,21 @@ export class Quiz extends Component {
     }
 
     randomizeAnswerOrder = (wrongAnswers, rightAnswer) => {
-        // Sekoita oikea vastaus vääriin
-        return wrongAnswers
+        wrongAnswers.push(rightAnswer)
+        return this.shuffleArray(wrongAnswers)
+    }
+
+    shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    checkTheAnswer = (answer) => {
+        console.log("You answered " + answer)
+        console.log("The correct answer is " + this.props.questions[this.state.currentQuestionNumberIndex].correct_answer)
     }
 
     render() {
@@ -21,19 +34,20 @@ export class Quiz extends Component {
                 <CardContent>
                     <span style={{ float: 'right' }}>1/10</span>
                     <Typography style={{ paddingTop: '1em', paddingBottom: '1em' }} variant="h5" component="h2">
-                        {this.props.questions[0].question}
+                        {this.props.questions[this.state.currentQuestionNumberIndex].question}
                     </Typography>
 
                 </CardContent>
 
-                {this.randomizeAnswerOrder(this.props.questions[this.state.currentQuestionNumberIndex].incorrect_answers, this.props.questions[this.state.currentQuestionNumberIndex].correct_answer).map(incorrectAnswer =>
+                {this.randomizeAnswerOrder(this.props.questions[this.state.currentQuestionNumberIndex].incorrect_answers, this.props.questions[this.state.currentQuestionNumberIndex].correct_answer).map(answer =>
                     <Button
                         style={answerButtonStyle} 
                         size="large" 
                         color="primary"
                         key={uuid()}
+                        onClick={this.checkTheAnswer.bind(this, answer)}
                     >
-                        {incorrectAnswer}
+                        {answer}
                     </Button>
                 )}
 

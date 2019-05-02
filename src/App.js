@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/Header'
-import Todos from './components/Todos';
-import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
-import uuid from 'uuid';
 import axios from 'axios';
-
-
 import './App.css';
-import { template } from '@babel/core';
 import QuizSetup from './components/QuizSetup';
 import Quiz from './components/Quiz';
+import uuid from 'uuid/v4';
 
 class App extends Component {
   state = {
@@ -85,7 +78,8 @@ class App extends Component {
     
     axios.get(url)
       .then(res => {
-        if (res.status === 200) {          
+        if (res.status === 200) {     
+          // res.data.results.map(result => result.id = uuid())     
           this.setState({questions: this.decodeQuestionsHtmlEntity(res.data.results)})
         } 
         else {

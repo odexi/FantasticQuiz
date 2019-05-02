@@ -1,4 +1,4 @@
-import React, { Component, Input } from 'react'
+import React, { Component } from 'react'
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 export class Categories extends Component {
