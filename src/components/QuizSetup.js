@@ -9,14 +9,14 @@ export class QuizSetup extends Component {
         nickname: '',
         numberOfQuestions: 5,
         category: 0,
+        categoryName: '',
         difficulty: 'any',
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-    selectCategory = (categoryId) => {
-        console.log(categoryId)
-        this.setState({ category: categoryId.toString() })
+    selectCategory = (categoryId, category) => {
+        this.setState({ category: categoryId.toString(), categoryName: category })
     }
 
     render() {
@@ -27,7 +27,6 @@ export class QuizSetup extends Component {
                     <Input
                         type="text"
                         name="nickname"
-                        //style={{marginBottom: 2 + 'em'}}
                         value={this.state.nickname}
                         onChange={this.onChange}
                     ></Input></FormControl><br></br>
@@ -46,7 +45,7 @@ export class QuizSetup extends Component {
                     </NativeSelect></FormControl><br></br>
                 <FormControl style={optionStyle}>
                     <span>Select category:</span><br></br>
-                    <Categories selectCategory={this.selectCategory}/></FormControl><br></br>
+                    <Categories selectCategory={this.selectCategory} /></FormControl><br></br>
                 <FormControl style={optionStyle}>
                     <span>Select difficulty:</span><br></br>
                     <NativeSelect
@@ -64,7 +63,7 @@ export class QuizSetup extends Component {
 
                 <Button variant="contained" color="primary"
                     onClick={this.props.getQuestions
-                        .bind(this, this.state.nickname, this.state.numberOfQuestions, this.state.category, this.state.difficulty)}
+                        .bind(this, this.state.nickname, this.state.numberOfQuestions, this.state.category, this.state.categoryName, this.state.difficulty)}
                 >
                     Start
                 </Button>

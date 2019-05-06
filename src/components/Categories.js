@@ -9,7 +9,7 @@ export class Categories extends Component {
 
     changeCategory = (e) => {
         this.setState({ [e.target.name]: e.target.value });
-        this.props.selectCategory(e.target.value)
+        this.props.selectCategory(e.target.value, categories.find(c => c.id === parseInt(e.target.value)).name)
     }
 
     render() {
@@ -20,7 +20,6 @@ export class Categories extends Component {
                 name='selectedCategory'
                 onChange={this.changeCategory}
             >
-
                 {categories.map(category =>
                     <option
                         key={category.id}
@@ -41,7 +40,7 @@ const categories = [
     },
     {
         name: 'General Knowledge',
-        id: '9'
+        id: 9
     },
     {
         name: 'Entertainment: Books',

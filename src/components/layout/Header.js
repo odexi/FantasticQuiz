@@ -4,8 +4,6 @@ function Header() {
     return (
         <header style={headerStyle}>
             <h1>Fantastic Quiz</h1>
-            {/* <Link style={linkStyle} to="/">Home</Link> | 
-            <Link style={linkStyle} to="/about">About</Link> */}
         </header>
     )
 }
@@ -17,9 +15,5 @@ const headerStyle = {
     padding: '10px'
 }
 
-// const linkStyle= {
-//     color: '#fff',
-//     textDecoration: 'none'
-// }
 
 export default Header;
