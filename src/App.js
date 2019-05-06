@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/Header'
 import About from './components/pages/About';
@@ -10,7 +11,8 @@ import uuid from 'uuid/v4';
 
 class App extends Component {
   state = {
-    questions: []
+    questions: [],
+    options: {}
   }
 
   componentDidMount() {
@@ -79,14 +81,47 @@ class App extends Component {
     axios.get(url)
       .then(res => {
         if (res.status === 200) {     
-          // res.data.results.map(result => result.id = uuid())     
-          this.setState({questions: this.decodeQuestionsHtmlEntity(res.data.results)})
+          res.data.results.map(result => result = this.createAnswerObjects(result))     
+
+          let options = {
+            nickname: nickname,
+            category: categoryId,
+            difficulty: difficulty
+          }
+         
+          this.setState({
+            questions: this.decodeQuestionsHtmlEntity(res.data.results),
+            options: options
+          })
         } 
         else {
           console.log("Api call was unsuccessfull!")
         }
         
       })
+  }
+
+  createAnswerObjects = (result) => {
+
+    let correctAnswer = result.correct_answer
+    let answers = []
+
+    for (const [index, value] of result.incorrect_answers.entries()) {
+      let answer = {
+        text: value,
+        id: 'i' + uuid()
+      }
+
+      answers.push(answer)
+    }
+
+    result.incorrect_answers = answers
+    result.correct_answer = {
+      text: correctAnswer,
+      id: 'i' + uuid()
+    }
+
+    return result;
   }
 
   decodeHtml = (html) => {
@@ -98,11 +133,15 @@ class App extends Component {
   decodeQuestionsHtmlEntity = (results) => {
     results = results.map(result => {
       result.question = this.decodeHtml(result.question);
-      result.correct_answer = this.decodeHtml(result.correct_answer);
-      result.incorrect_answers.map(res => this.decodeHtml(res));
+      result.correct_answer.text = this.decodeHtml(result.correct_answer.text);
+      result.incorrect_answers.map(res => this.decodeHtml(res.text));
       return result
     })
     return results    
+  }
+
+  updateView = () => {
+    ReactDOM.render(<Router />, document.getElementById('root'))
   }
 
   render() {
@@ -117,10 +156,12 @@ class App extends Component {
 
         <div className="App">
           <div className="container">
+            {this.state.questions.length === 0 ? 
             <Header />
+            : null}
             <Route exact path="/" render={props => (
               <React.Fragment>
-                { this.state.questions.length > 0 ? <Quiz questions={this.state.questions} /> : <QuizSetup getQuestions={this.getQuestions}/> }
+                { this.state.questions.length > 0 ? <Quiz questions={this.state.questions} nextQuestion={this.updateView} options={this.state.options} /> : <QuizSetup getQuestions={this.getQuestions}/> }
                 
               </React.Fragment>
             )} />
