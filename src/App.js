@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   getQuestions = (nickname, numberOfQuestions, categoryId, categoryName, difficulty) => {
-    console.log(nickname, numberOfQuestions, categoryId, difficulty)
     let url = `https://opentdb.com/api.php?type=multiple&amount=${numberOfQuestions}`
 
     if (categoryId !== 'any') {
@@ -30,8 +29,6 @@ class App extends Component {
     if (difficulty !== 'any') {
       url = url + `&difficulty=${difficulty}`
     }
-
-    console.log(url)
 
     axios.get(url)
       .then(res => {
@@ -96,6 +93,13 @@ class App extends Component {
     return results
   }
 
+  resetGame = () => {
+    this.setState({
+      questions: []
+    })
+    //ReactDOM.render(this.render(), document.getElementById('root'))
+  }
+
   render() {
     return (
       <div>
@@ -113,7 +117,7 @@ class App extends Component {
               : null}
             {/* <Route exact path="/" render={props => ( */}
               {/* <React.Fragment> */}
-                {this.state.questions.length > 0 ? <Quiz questions={this.state.questions} options={this.state.options} /> : <QuizSetup getQuestions={this.getQuestions} />}
+                {this.state.questions.length > 0 ? <Quiz questions={this.state.questions} options={this.state.options} resetGame={this.resetGame}/> : <QuizSetup getQuestions={this.getQuestions} />}
 
               {/* </React.Fragment> */}
             {/* )} /> */}

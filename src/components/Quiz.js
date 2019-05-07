@@ -28,25 +28,41 @@ export class Quiz extends Component {
     checkTheAnswer = (answer) => {
         if (answer.id === this.props.questions[this.state.currentQuestionNumberIndex].correct_answer.id) {
             document.querySelector(`#${answer.id}`).style.backgroundColor = '#88E823';
-            this.state.rightAnswers++;
+            setTimeout(() => {
+                let newValue = this.state.rightAnswers + 1
+                let newIndex = this.state.currentQuestionNumberIndex + 1;
+                if (newIndex < this.props.questions.length) {
+                    this.setState({currentQuestionNumberIndex: newIndex, rightAnswers: newValue})
+                }
+                else {
+                    this.setState({currentQuestionNumberIndex: newIndex, rightAnswers: newValue, showResults: true})
+                }
+            }, 2000)
+            
         }
         else {
             document.querySelector(`#${this.props.questions[this.state.currentQuestionNumberIndex].correct_answer.id}`).style.backgroundColor = '#88E823'
             document.querySelector(`#${answer.id}`).style.backgroundColor = '#FF121F'
+            setTimeout(() => {
+                let newIndex = this.state.currentQuestionNumberIndex + 1;
+                if (newIndex < this.props.questions.length) {
+                    this.setState({currentQuestionNumberIndex: newIndex})
+                }
+                else {
+                    this.setState({currentQuestionNumberIndex: newIndex, showResults: true})
+                }
+            }, 2000)
+            
         }
-        this.state.currentQuestionNumberIndex++
-        setTimeout(() => {
-            if (this.state.currentQuestionNumberIndex < this.props.questions.length) {
-                ReactDOM.render(this.render(), document.getElementById('root'))
-            }
-            else {
-                this.state.showResults = true;
-                ReactDOM.render(this.render(), document.getElementById('root'))
-            }
-        }
-            , 2000
-        )
     }
+
+    resetQuizState = () => {
+        this.setState({
+            currentQuestionNumberIndex: 0,
+            rightAnswer: 0,
+            showResults: false
+        })
+      }
 
     render() {
         return (
@@ -89,7 +105,9 @@ export class Quiz extends Component {
                             data={{
                                 rightAnswers: this.state.rightAnswers,
                                 questionAmount: this.props.questions.length
-                            }} />}
+                            }}
+                            resetGame={this.props.resetGame} 
+                            resetQuizState={this.resetQuizState}/>}
 
                 </Card>
             </div>
