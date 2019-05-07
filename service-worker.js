@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
 
 importScripts(
-  "/FantasticQuiz/precache-manifest.139a6037cb7610272e048ae0b125e7fa.js"
+  "/FantasticQuiz/precache-manifest.bfffe1baa44721ed59c7b087d97065b2.js"
 );
 
 self.addEventListener('message', (event) => {
