@@ -96,13 +96,9 @@ class App extends Component {
     return results
   }
 
-  updateView = () => {
-    ReactDOM.render(<Router />, document.getElementById('root'))
-  }
-
   render() {
     return (
-      <Router>
+      <div>
 
         <header>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
@@ -117,7 +113,7 @@ class App extends Component {
               : null}
             {/* <Route exact path="/" render={props => ( */}
               <React.Fragment>
-                {this.state.questions.length > 0 ? <Quiz questions={this.state.questions} nextQuestion={this.updateView} options={this.state.options} /> : <QuizSetup getQuestions={this.getQuestions} />}
+                {this.state.questions.length > 0 ? <Quiz questions={this.state.questions} options={this.state.options} /> : <QuizSetup getQuestions={this.getQuestions} />}
 
               </React.Fragment>
             {/* )} /> */}
@@ -125,7 +121,7 @@ class App extends Component {
 
           </div>
         </div>
-      </Router>
+      </div>
 
 
     );
