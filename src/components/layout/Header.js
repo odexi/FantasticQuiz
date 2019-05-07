@@ -4,6 +4,7 @@ function Header() {
     return (
         <header style={headerStyle}>
             <h1>Fantastic Quiz</h1>
+            <p style={{color: 'white', fontSize: '9px'}}>version 1.0</p>
         </header>
     )
 }
