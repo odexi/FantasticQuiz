@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/FantasticQuiz/static/css/main.36fe29b4.chunk.css",
-    "main.js": "/FantasticQuiz/static/js/main.b6b1f674.chunk.js",
-    "main.js.map": "/FantasticQuiz/static/js/main.b6b1f674.chunk.js.map",
+    "main.js": "/FantasticQuiz/static/js/main.baf89895.chunk.js",
+    "main.js.map": "/FantasticQuiz/static/js/main.baf89895.chunk.js.map",
     "runtime~main.js": "/FantasticQuiz/static/js/runtime~main.5493f255.js",
     "runtime~main.js.map": "/FantasticQuiz/static/js/runtime~main.5493f255.js.map",
-    "static/js/2.b9dd1869.chunk.js": "/FantasticQuiz/static/js/2.b9dd1869.chunk.js",
-    "static/js/2.b9dd1869.chunk.js.map": "/FantasticQuiz/static/js/2.b9dd1869.chunk.js.map",
+    "static/js/2.1f534c7b.chunk.js": "/FantasticQuiz/static/js/2.1f534c7b.chunk.js",
+    "static/js/2.1f534c7b.chunk.js.map": "/FantasticQuiz/static/js/2.1f534c7b.chunk.js.map",
     "index.html": "/FantasticQuiz/index.html",
-    "precache-manifest.bfffe1baa44721ed59c7b087d97065b2.js": "/FantasticQuiz/precache-manifest.bfffe1baa44721ed59c7b087d97065b2.js",
+    "precache-manifest.779aa298416829ef58417ba25f5bcbe1.js": "/FantasticQuiz/precache-manifest.779aa298416829ef58417ba25f5bcbe1.js",
     "service-worker.js": "/FantasticQuiz/service-worker.js",
     "static/css/main.36fe29b4.chunk.css.map": "/FantasticQuiz/static/css/main.36fe29b4.chunk.css.map"
   }
