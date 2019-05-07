@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-
+    
   }
 
   getQuestions = (nickname, numberOfQuestions, categoryId, categoryName, difficulty) => {

@@ -13,7 +13,6 @@ export class Quiz extends Component {
     }
 
     randomizeAnswerOrder = (wrongAnswers, rightAnswer) => {
-
         wrongAnswers.push(rightAnswer)
         return this.shuffleArray(wrongAnswers)
     }
@@ -27,7 +26,6 @@ export class Quiz extends Component {
     }
 
     checkTheAnswer = (answer) => {
-
         if (answer.id === this.props.questions[this.state.currentQuestionNumberIndex].correct_answer.id) {
             document.querySelector(`#${answer.id}`).style.backgroundColor = '#88E823';
             this.state.rightAnswers++;
@@ -62,8 +60,12 @@ export class Quiz extends Component {
                     </header>
                     {!this.state.showResults ?
                         <CardContent>
-                            <span style={{ float: 'right' }}>{this.state.currentQuestionNumberIndex + 1 + '/' + this.props.questions.length}</span>
-                            <Typography style={{ paddingTop: '1em', paddingBottom: '1em' }} variant="h5" component="h2">
+                            <div>
+                                <span style={{ float: 'right' }}>{this.state.currentQuestionNumberIndex + 1 + '/' + this.props.questions.length}</span>
+                                <span style={{ float: 'left' }}>{this.props.questions[this.state.currentQuestionNumberIndex].category}</span>
+                            </div>
+                            
+                            <Typography style={{ paddingTop: '2em', paddingBottom: '1em' }} variant="h5" component="h2">
                                 {this.props.questions[this.state.currentQuestionNumberIndex].question}
                             </Typography>
 
