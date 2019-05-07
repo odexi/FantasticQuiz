@@ -102,7 +102,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Router>
 
         <header>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
@@ -115,17 +115,17 @@ class App extends Component {
             {this.state.questions.length === 0 ?
               <Header />
               : null}
-            {/* <Route exact path="/" render={props => ( */}
-              {/* <React.Fragment> */}
+             <Route exact path="/" render={props => ( 
+             <React.Fragment> 
                 {this.state.questions.length > 0 ? <Quiz questions={this.state.questions} options={this.state.options} resetGame={this.resetGame}/> : <QuizSetup getQuestions={this.getQuestions} />}
 
-              {/* </React.Fragment> */}
-            {/* )} /> */}
-            {/* <Route path="/about" component={About} /> */}
+              </React.Fragment> 
+            )} />
+             <Route path="/about" component={About} />
 
           </div>
         </div>
-      </div>
+      </Router>
 
 
     );
