@@ -115,13 +115,13 @@ class App extends Component {
             {this.state.questions.length === 0 ?
               <Header />
               : null}
-            <Route exact path="/" render={props => (
+            {/* <Route exact path="/" render={props => ( */}
               <React.Fragment>
                 {this.state.questions.length > 0 ? <Quiz questions={this.state.questions} nextQuestion={this.updateView} options={this.state.options} /> : <QuizSetup getQuestions={this.getQuestions} />}
 
               </React.Fragment>
-            )} />
-            <Route path="/about" component={About} />
+            {/* )} /> */}
+            {/* <Route path="/about" component={About} /> */}
 
           </div>
         </div>
