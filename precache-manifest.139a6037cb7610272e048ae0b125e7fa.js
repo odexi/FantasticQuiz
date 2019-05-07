@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dfca11afe1f50c51176ed09ea83d8da0",
+    "revision": "41e3cfedb2e51d61a0dce40a705dd4de",
     "url": "/FantasticQuiz/index.html"
   },
   {
-    "revision": "0506d1ea4b83d2e53297",
+    "revision": "22bf9b441830e3f5506b",
     "url": "/FantasticQuiz/static/css/main.36fe29b4.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/FantasticQuiz/static/js/2.9cefeb44.chunk.js"
   },
   {
-    "revision": "0506d1ea4b83d2e53297",
-    "url": "/FantasticQuiz/static/js/main.d353484a.chunk.js"
+    "revision": "22bf9b441830e3f5506b",
+    "url": "/FantasticQuiz/static/js/main.d8a65b9f.chunk.js"
   },
   {
     "revision": "2ae3bd97773135787ea7",
