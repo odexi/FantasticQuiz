@@ -81,6 +81,8 @@ export class Quiz extends Component {
                                     {answer.text}
                                 </Button>
                             )}
+
+                            <span style={{textAlign: 'center', paddingTop: '2em'}}>Difficulty: {this.props.questions[this.state.currentQuestionNumberIndex].difficulty}</span>
                         </CardContent>
                         : <Results
                             options={this.props.options}
